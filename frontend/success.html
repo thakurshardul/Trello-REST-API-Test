@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        window.onload = function() {
+            const params = new URLSearchParams(window.location.search);
+            document.getElementById("cardName").textContent = params.get("name");
+            document.getElementById("cardDesc").textContent = params.get("desc");
+            document.getElementById("cardStart").textContent = params.get("start") || "N/A";
+            document.getElementById("cardDue").textContent = params.get("due") || "N/A";
+        };
+    </script>
+</head>
+<body>
+    <div class="success-container">
+        <div class="checkmark">✔</div>
+        <h2>Card Created Successfully!</h2>
+        <p><strong>Name:</strong> <span id="cardName"></span></p>
+        <p><strong>Description:</strong> <span id="cardDesc"></span></p>
+        <p><strong>Start Date:</strong> <span id="cardStart"></span></p>
+        <p><strong>Due Date:</strong> <span id="cardDue"></span></p>
+        <a href="index.html"><button>Go Back</button></a>
+    </div>
+</body>
+</html>
