@@ -1,21 +1,34 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const c=new Date()-new Date().getTimezoneOffset()
-    console.log(new Date(c).toISOString())
     const today=new Date().toISOString().split("T")[0]
-    
     document.getElementById("startDate").setAttribute("min",  today);
     document.getElementById("dueDate").setAttribute("min", today);
 
-    //the below code is working as expected. the aove i have to work upon then after that test all the edge cases.
     document.getElementById("trelloForm").addEventListener("submit", async function(event) {
         event.preventDefault();
         
-        const formData = {
-            name: document.getElementById("name").value,
-            description: document.getElementById("description").value,
-            startDate: document.getElementById("startDate").value,
-            dueDate: document.getElementById("dueDate").value
-        };
+        const name = document.getElementById("name").value.trim();
+        const description = document.getElementById("description").value.trim();
+        const startDate = document.getElementById("startDate").value;
+        const dueDate = document.getElementById("dueDate").value;
+        const errorMessage = document.getElementById("errorMessage");
+        const submitButton = document.getElementById("submitButton");
+        
+        errorMessage.textContent = ""; // Clear previous errors
+
+        if (!name || !description || !startDate || !dueDate) {
+            errorMessage.textContent = "All fields are required!";
+            return;
+        }
+
+        if (startDate > dueDate) {
+            errorMessage.textContent = "Start Date must be before the Due Date!";
+            return;
+        }
+        submitButton.disabled = true;
+        submitButton.textContent = "Loading...";
+        
+        const formData = { name, description, startDate, dueDate };
+
         try {
                 const response = await fetch("http://localhost:3000/create-card", {
                 method: "POST",
