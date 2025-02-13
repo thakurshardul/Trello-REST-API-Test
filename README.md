@@ -43,7 +43,7 @@ This project is a full-stack application designed to interact with the Trello RE
     run index.html
   ```
 ## Authors
-[Shardul Vikram Singh][(https://my-portfolio-thakursharduls-projects.vercel.app/)]
+[Shardul Vikram Singh](https://my-portfolio-thakursharduls-projects.vercel.app/)
 
 
 
